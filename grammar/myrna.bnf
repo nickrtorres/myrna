@@ -1,0 +1,36 @@
+<program> ::= <machine> | <main>
+
+<machine> ::= machine <name> { <machine_contents> }
+
+<machine_contents> ::= <transition> <machine_contents>
+<machine_contents> ::= <transition>
+
+<machine_contents> ::= <entry> <machine_contents>
+<machine_contents> ::= <entry>
+
+<machine_contents> ::= <nonterminal> <machine_contents>
+<machine_contents> ::= <nonterminal>
+
+<machine_contents> ::= <terminal> <machine_contents>
+<machine_contents> ::= <terminal>
+
+<transition> ::= <transition_entry>
+<transition_entry> ::= <transition_desc>, <transition_entry>
+<transition_entry> ::= <transition_desc>
+<transition_desc> ::= <name> = <char>
+
+<entry> ::= entry <name> { <state_desc> }
+<nonterminal> ::= nonterminal <name> { <state_desc> }
+<terminal> ::= terminal <name> { <state_desc> }
+
+<state_desc> ::= <state_transition>, <state_desc>
+<state_desc> ::= <state_transition>
+<state_transition> ::= <name> -> <name>
+
+<main> ::= { <stmt_list> }
+
+<stmt_list> ::= <stmt>, <stmt_list>
+<stmt_list> ::= <stmt>
+
+<stmt> ::= <name> accepts <word>
+<stmt> ::= <name> rejects <word>

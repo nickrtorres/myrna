@@ -1,0 +1,13 @@
+Write a language that makes writing automotons easy
+
+Meta language?
+
+Meta programming?
+
+Input
+-----
+  myrna state descriptions
+
+Output
+------
+  compiled code that creates a program using the state patterns
