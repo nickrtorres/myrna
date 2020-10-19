@@ -28,11 +28,11 @@ machine_contents : transition                           { $1 }
 transition : transition_entry                           { $1 }
   ;
 
-transition_entry : transition_desc                      { $1 }
-                 | transition_entry transition_desc     { $1 }
+transition_entry : transition_desc                      { $1 :: [] }
+                 | transition_entry transition_desc     { $2 :: $1 }
   ;
 
-transition_desc : TRANSITION IDENT EQ STRING            { Transition($2, $4) :: [] }
+transition_desc : TRANSITION IDENT EQ STRING            { Transition($2, $4) }
   ;
 
 %%
