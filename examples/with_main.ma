@@ -12,3 +12,7 @@ machine AyBee {
     B -> E,
   }
 }
+
+main {
+  accepts AyBee "ba"
+}

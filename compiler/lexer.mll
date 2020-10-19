@@ -1,5 +1,6 @@
 { 
-  open Token ;;
+  open Parser ;;
+
   exception Eof ;;
   exception SyntaxError of string
 
@@ -8,18 +9,13 @@
 
   let _ = List.iter (fun (kwd, tok) -> Hashtbl.add keyword_table kwd tok)
                       [ "machine", MACHINE;
-                        "transition", TRANSITION;
-                        "entry", ENTRY;
-                        "terminal", TERMINAL;
-                        "nonterminal", NONTERMINAL;
-                        "accepts", ACCEPTS; ]
+                        "transition", TRANSITION; ]
   ;;
 
 }
 
 rule token = parse
-    [' ' '\t']      { token lexbuf }
-  | ['\n' ]         { EOL }
+    [' ' '\t' '\n']      { token lexbuf }
   | ['A' - 'Z' 'a' - 'z'] ['A' - 'Z'  'a' - 'z' '0' - '9' '_'] * as id
     { try
         Hashtbl.find keyword_table id
@@ -27,10 +23,9 @@ rule token = parse
         IDENT id }
   | '{'             { LBRACE }
   | '}'             { RBRACE }
-  | ','             { COMMA }
   | '='             { EQ }
-  | "->"            { ARROW }
   | '"'             { read_string (Buffer.create 17) lexbuf }
+  | eof             { raise Eof }
 
 (*
  * Taken from "Real World Ocaml":
