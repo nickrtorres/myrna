@@ -1,9 +1,12 @@
 .POSIX:
 
+# FIXME Everything is an error except wildcard pattern matching.
+OFLAGS =  -w A -w -4 -warn-error A
+
 all: myrnac
 
 myrnac: parser.ml lexer.ml dump.ml fe.ml me.ml driver.ml
-	ocamlopt -o $@ parser.ml lexer.ml dump.ml fe.ml me.ml driver.ml
+	ocamlopt $(OFLAGS) -o $@ parser.ml lexer.ml dump.ml fe.ml me.ml driver.ml
 
 lexer.ml: lexer.mll
 	ocamllex $?
