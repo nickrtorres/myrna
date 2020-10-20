@@ -8,7 +8,8 @@
 
   let _ = List.iter (fun (kwd, tok) -> Hashtbl.add keyword_table kwd tok)
                       [ "machine", MACHINE;
-                        "transition", TRANSITION; ]
+                        "transition", TRANSITION;
+                        "entry", ENTRY; ]
 }
 
 rule token = parse
@@ -20,6 +21,8 @@ rule token = parse
         IDENT id }
   | '{'             { LBRACE }
   | '}'             { RBRACE }
+  | ','             { COMMA }
+  | "->"            { ARROW }
   | '='             { EQ }
   | '"'             { read_string (Buffer.create 17) lexbuf }
   | eof             { raise Eof }

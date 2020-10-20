@@ -23,16 +23,24 @@ and print_feature_list fl =
 and print_feature f =
   match f with
     | Transition (iden, s) -> printf "\tTRANSITION %s -> %s\n" iden s
-
-let print_token token =
-  match token with
-    | MACHINE -> printf "MACHINE"
-    | TRANSITION -> printf "TRANSITION"
-    | LBRACE -> printf "LBRACE"
-    | RBRACE -> printf "RBRACE"
-    | EQ -> printf "EQ"
-    | STRING (s) -> printf "STRING %s" s
-    | IDENT (s) -> printf "IDENT %s" s
+    | Entry (iden, s) -> begin
+      printf "\tENTRY: %s\n" iden;
+      print_state_transitions s
+    end
+    | Terminal (iden, s) -> begin
+      printf "\tTERMINAL %s" iden;
+      print_state_transitions s
+    end
+and print_state_transitions transitions =
+  match transitions with
+    | [] -> ()
+    | x::xs -> begin
+      print_transition x;
+      print_state_transitions xs
+    end
+and print_transition s =
+  let from_state, to_state = s in
+  printf "\t\t%s -> %s\n" from_state to_state
 
 let dump_ast () = 
   try
