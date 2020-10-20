@@ -1,17 +1,14 @@
 { 
-  open Parser ;;
+  open Parser
 
-  exception Eof ;;
+  exception Eof
   exception SyntaxError of string
 
   let keyword_table = Hashtbl.create 53
-  ;;
 
   let _ = List.iter (fun (kwd, tok) -> Hashtbl.add keyword_table kwd tok)
                       [ "machine", MACHINE;
                         "transition", TRANSITION; ]
-  ;;
-
 }
 
 rule token = parse
