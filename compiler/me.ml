@@ -29,7 +29,7 @@ and store_transitions_feature_list feature_list =
 and store_transitions_machine_feature machine_feature =
   match machine_feature with
     | Transition (iden, c) -> Hashtbl.add transition_table iden c
-    | _ -> ()
+    | Entry _  | NonTerminal _ | Terminal _ -> ()
 
 let rec check_transitions ast =
   match ast with
@@ -50,7 +50,7 @@ and check_transitions_machine_feature machine_feature =
     | Terminal (_, state_list)
       | NonTerminal (_, state_list)
       | Entry (_, state_list) -> check_state_list state_list
-    | _ -> ()
+    | Transition (_, _) -> ()
 and check_state_list state_list =
   match state_list with
     | [] -> ()
