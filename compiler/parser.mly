@@ -19,31 +19,32 @@ type myrna_program = machine list
 %type  <myrna_program> program
 
 %%
-program : machine                                       { $1 :: [] }
+program : machine                                              { $1 :: [] }
   ;
 
-machine : MACHINE IDENT LBRACE machine_contents RBRACE  { Machine($2, $4) }
+machine : MACHINE IDENT LBRACE machine_feature_list RBRACE     { Machine($2, $4) }
   ;
 
-machine_contents : transition                           { $1 }
-                 | entry                                { $1 }
+machine_feature_list : machine_feature                         { $1 :: [] }
+                     | machine_feature_list machine_feature    { $2 :: $1 }
   ;
 
-transition : transition_entry                           { $1 }
+machine_feature : transition                                   { $1 }
+                | entry                                        { $1 }
+                | terminal                                     { $1 }
   ;
 
-transition_entry : transition_desc                      { $1 :: [] }
-                 | transition_entry transition_desc     { $2 :: $1 }
+transition : TRANSITION IDENT EQ STRING                       { Transition($2, $4) }
   ;
 
-transition_desc : TRANSITION IDENT EQ STRING            { Transition($2, $4) }
+terminal : TERMINAL IDENT LBRACE state_desc_list RBRACE       { Terminal($2, $4) }
   ;
 
-entry : ENTRY IDENT LBRACE state_desc_list RBRACE       { Entry($2, $4) :: [] }
+entry : ENTRY IDENT LBRACE state_desc_list RBRACE             { Entry($2, $4) }
   ;
 
-state_desc_list : state_desc                            { $1 :: [] }
-                | state_desc_list state_desc            { $2 :: $1 }
+state_desc_list : state_desc                                  { $1 :: [] }
+                | state_desc_list state_desc                  { $2 :: $1 }
   ;
 
 state_desc : IDENT ARROW IDENT COMMA                    { ($1, $3) }

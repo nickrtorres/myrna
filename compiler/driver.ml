@@ -28,7 +28,7 @@ and print_feature f =
       print_state_transitions s
     end
     | Terminal (iden, s) -> begin
-      printf "\tTERMINAL %s" iden;
+      printf "\tTERMINAL %s\n" iden;
       print_state_transitions s
     end
 and print_state_transitions transitions =

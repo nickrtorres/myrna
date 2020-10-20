@@ -9,6 +9,7 @@
   let _ = List.iter (fun (kwd, tok) -> Hashtbl.add keyword_table kwd tok)
                       [ "machine", MACHINE;
                         "transition", TRANSITION;
+                        "terminal", TERMINAL;
                         "entry", ENTRY; ]
 }
 
