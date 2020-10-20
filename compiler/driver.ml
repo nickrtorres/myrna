@@ -1,9 +1,9 @@
-open Parser ;;
-open Printf ;; 
+open Parser
+open Printf
 
 let rec print_ast ast_list =
   match ast_list with
-    | [] -> printf "AST: empty list\n"
+    | [] -> ()
     | x::xs -> begin
       print_machine x; print_ast xs
     end
@@ -15,7 +15,7 @@ and print_machine m =
     end
 and print_feature_list fl =
   match fl with
-    | [] -> printf "\tFL: empty feature list\n"
+    | [] -> ()
     | f::fs -> begin
       print_feature f;
       print_feature_list fs
@@ -23,8 +23,6 @@ and print_feature_list fl =
 and print_feature f =
   match f with
     | Transition (iden, s) -> printf "\tTRANSITION %s -> %s\n" iden s
-;;
-
 
 let print_token token =
   match token with
@@ -36,13 +34,23 @@ let print_token token =
     | STRING (s) -> printf "STRING %s" s
     | IDENT (s) -> printf "IDENT %s" s
 
-let _ =
+let dump_ast () = 
   try
     let lexbuf = Lexing.from_channel stdin in
     while true do
       let result = Parser.program Lexer.token lexbuf in
       print_ast result;
-      print_newline(); flush stdout
+      flush stdout
     done
-  with Lexer.Eof ->
-    exit 0
+  with Lexer.Eof -> ()
+
+let do_dump_ast = ref false
+
+let main () = begin
+  let args = [("-d", Arg.Set do_dump_ast, "Dump a myrna AST to STDOUT")] in
+  let usage = "myrnac: [-d] FILE" in
+  Arg.parse args print_endline usage;
+  if !do_dump_ast then dump_ast () else ()
+end
+
+let _ = main ()
