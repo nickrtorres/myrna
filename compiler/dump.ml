@@ -4,8 +4,8 @@ open Printf
 let rec print_ast ast_list =
   match ast_list with
     | [] -> ()
-    | x::xs -> begin
-      print_machine x; print_ast xs
+    | hd::tl -> begin
+      print_machine hd; print_ast tl
     end
 and print_machine m =
   match m with
@@ -16,9 +16,9 @@ and print_machine m =
 and print_feature_list fl =
   match fl with
     | [] -> ()
-    | f::fs -> begin
-      print_feature f;
-      print_feature_list fs
+    | hd::tl -> begin
+      print_feature hd;
+      print_feature_list tl
     end
 and print_feature f =
   match f with
@@ -38,9 +38,9 @@ and print_feature f =
 and print_state_transitions transitions =
   match transitions with
     | [] -> ()
-    | x::xs -> begin
-      print_transition x;
-      print_state_transitions xs
+    | hd::tl -> begin
+      print_transition hd;
+      print_state_transitions tl
     end
 and print_transition s =
   let from_state, to_state = s in

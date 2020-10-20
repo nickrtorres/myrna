@@ -15,16 +15,16 @@ exception UndefinedState of string
 let rec store_transitions ast =
   match ast with
     | [] -> ()
-    | x::xs -> store_transitions_machine x
+    | hd::_ -> store_transitions_machine hd
 and store_transitions_machine machine=
   match machine with
     | Machine (_, feature_list) -> store_transitions_feature_list feature_list
 and store_transitions_feature_list feature_list =
   match feature_list with
     | [] -> ()
-    | x::xs -> begin
-      store_transitions_machine_feature x;
-      store_transitions_feature_list xs
+    | hd::tl -> begin
+      store_transitions_machine_feature hd;
+      store_transitions_feature_list tl
     end
 and store_transitions_machine_feature machine_feature =
   match machine_feature with
@@ -34,16 +34,16 @@ and store_transitions_machine_feature machine_feature =
 let rec check_transitions ast =
   match ast with
     | [] -> ()
-    | x::xs -> check_transitions_machine x
+    | hd::_ -> check_transitions_machine hd
 and check_transitions_machine machine=
   match machine with
     | Machine (_, feature_list) -> check_transitions_feature_list feature_list
 and check_transitions_feature_list feature_list =
   match feature_list with
     | [] -> ()
-    | x::xs -> begin
-      check_transitions_machine_feature x;
-      check_transitions_feature_list xs
+    | hd::tl -> begin
+      check_transitions_machine_feature hd;
+      check_transitions_feature_list tl
     end
 and check_transitions_machine_feature machine_feature =
   match machine_feature with
@@ -54,8 +54,8 @@ and check_transitions_machine_feature machine_feature =
 and check_state_list state_list =
   match state_list with
     | [] -> ()
-    | state::states -> begin
-      let from_state, to_state = state in
+    | hd::_ -> begin
+      let from_state, to_state = hd in
         if Option.is_none (Hashtbl.find_opt transition_table from_state) then
           raise (UndefinedState (from_state))
         else if Option.is_none (Hashtbl.find_opt transition_table to_state) then
