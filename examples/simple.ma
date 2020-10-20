@@ -3,8 +3,13 @@ machine AyBee {
   transition B = "b"
 
   entry E {
-    A -> S2,
+    A -> S1,
     B -> E,
+  }
+
+  nonterminal S1 {
+    A -> S2,
+    B -> S2,
   }
 
   terminal S2 {

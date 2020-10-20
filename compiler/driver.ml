@@ -31,6 +31,10 @@ and print_feature f =
       printf "\tTERMINAL %s\n" iden;
       print_state_transitions s
     end
+    | NonTerminal (iden, s) -> begin
+      printf "\tNONTERMINAL %s\n" iden;
+      print_state_transitions s
+    end
 and print_state_transitions transitions =
   match transitions with
     | [] -> ()
