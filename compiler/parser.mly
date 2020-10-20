@@ -52,7 +52,7 @@ state_desc_list : state_desc                                  { $1 :: [] }
                 | state_desc_list state_desc                  { $2 :: $1 }
   ;
 
-state_desc : IDENT ARROW IDENT COMMA                    { ($1, $3) }
+state_desc : IDENT ARROW IDENT COMMA                          { ($1, $3) }
   ;
 
 %%
