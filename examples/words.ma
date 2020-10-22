@@ -1,47 +1,42 @@
 machine Automaton {
-  transition A = 'a'
-  transition B = 'b'
-  transition C = 'c'
+  transition A = "a"
+  transition B = "b"
+  transition C = "c"
 
   entry E {
-    A -> 2,
+    A -> S2,
     B -> E,
     C -> E,
   }
 
-  nonterminal 2 {
-    A -> 2,
-    B -> 3,
+  nonterminal S2 {
+    A -> S2,
+    B -> S3,
     C -> E,
   }
 
-  nonterminal 3 {
-    A -> 2,
+  nonterminal S3 {
+    A -> S2,
     B -> E,
-    C -> 4,
+    C -> S4,
   }
 
-  terminal 4 {
-    A -> 5,
-    B -> 4,
-    C -> 4,
+  terminal S4 {
+    A -> S5,
+    B -> S4,
+    C -> S4,
   }
 
 
-  terminal 5 {
-    A -> 5,
-    B -> 6,
-    C -> 4,
+  terminal S5 {
+    A -> S5,
+    B -> S6,
+    C -> S4,
   }
 
-  terminal 6 {
-    A -> 5,
-    B -> 4,
+  terminal S6 {
+    A -> S5,
+    B -> S4,
     C -> E,
   }
-}
-
-main {
-  Automaton accepts "abc"
-  Automaton rejects "zzz"
 }
