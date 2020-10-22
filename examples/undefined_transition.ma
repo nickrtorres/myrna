@@ -4,6 +4,6 @@ machine AyBee {
 
   entry E {
     A -> S1,
-    B -> E,
+    C -> E,
   }
 }

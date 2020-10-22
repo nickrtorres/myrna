@@ -11,10 +11,14 @@ let main () =
     Arg.parse args print_endline usage;
     if !do_dump_ast then dump_ast ast else ();
     store_transitions ast;
+    store_states ast;
     try
       check_transitions ast
-    with UndefinedState (s) ->
-      Printf.printf "myrnac: error: encountered undefined state -> %s\n" s
+    with
+      | UndefinedState (s) ->
+        Printf.printf "myrnac: error: encountered undefined state -> %s\n" s
+      | UndefinedTransition (s) ->
+        Printf.printf "myrnac: error: encountered undefined transition -> %s\n" s
   end
 
 let _ = main ()
