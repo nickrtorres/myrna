@@ -1,6 +1,5 @@
 .POSIX:
 
-# FIXME Everything is an error except wildcard pattern matching.
 OFLAGS =  -w A -warn-error A
 
 all: myrnac
