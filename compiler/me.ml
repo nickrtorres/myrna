@@ -1,10 +1,8 @@
 open Parser
 
 let transition_table = Hashtbl.create 53
-(* Really just a hash set but I can't find a type that works like that in the
- * stdlib
- *)
 let state_table = Hashtbl.create 53
+
 exception UndefinedState of string
 exception UndefinedTransition of string
 
