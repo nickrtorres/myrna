@@ -7,12 +7,10 @@ let rec print_ast ast_list =
     | hd::tl -> begin
       print_machine hd; print_ast tl
     end
-and print_machine m =
-  match m with
-    | Machine (iden, feature_list) -> begin
+and print_machine (iden, feature_list) = begin
       printf "MACHINE: %s\n" iden;
       print_feature_list feature_list
-    end
+end
 and print_feature_list fl =
   match fl with
     | [] -> ()

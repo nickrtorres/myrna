@@ -1,8 +1,7 @@
 %{
 type identifier = string
 
-type machine =
-  | Machine of identifier * machine_feature list
+type machine = identifier * machine_feature list
 and machine_feature =
   | Transition of identifier * string
   | Entry of identifier * state_desc list
@@ -23,7 +22,7 @@ type myrna_program = machine list
 program : machine                                              { $1 :: [] }
   ;
 
-machine : MACHINE IDENT LBRACE machine_feature_list RBRACE     { Machine($2, $4) }
+machine : MACHINE IDENT LBRACE machine_feature_list RBRACE     { ($2, $4) }
   ;
 
 machine_feature_list : machine_feature                         { $1 :: [] }
