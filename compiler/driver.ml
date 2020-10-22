@@ -15,7 +15,6 @@ let main () =
       check_transitions ast
     with UndefinedState (s) ->
       Printf.printf "myrnac: error: encountered undefined state -> %s\n" s
-
   end
 
 let _ = main ()
