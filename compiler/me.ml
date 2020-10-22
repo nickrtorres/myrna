@@ -14,7 +14,7 @@ let run_semantic_analysis ast =
   and store feature =
     match feature with
     | Transition (from, to_) -> Hashtbl.add transition_table from to_
-    | Entry (_, _) | Terminal (_, _) | NonTerminal (_, _) -> ()
+    | Entry _ | Terminal _ | NonTerminal _ -> ()
   in
 
   let rec store_states ast =
