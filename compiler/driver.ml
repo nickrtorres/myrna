@@ -1,6 +1,5 @@
 open Dump
 open Fe
-open Me
 
 let do_dump_ast = ref false
 
@@ -10,14 +9,12 @@ let main () =
   let ast = ast () in begin
     Arg.parse args print_endline usage;
     if !do_dump_ast then dump_ast ast else ();
-    store_transitions ast;
-    store_states ast;
     try
-      check_transitions ast
+      Me.into_ir ast;
     with
-      | UndefinedState (s) ->
+      | Me.UndefinedState (s) ->
         Printf.printf "myrnac: error: encountered undefined state -> %s\n" s
-      | UndefinedTransition (s) ->
+      | Me.UndefinedTransition (s) ->
         Printf.printf "myrnac: error: encountered undefined transition -> %s\n" s
   end
 
