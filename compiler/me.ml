@@ -45,5 +45,16 @@ let run_semantic_analysis ast =
 
 (* TODO *)
 let into_ir ast =
-  run_semantic_analysis ast;
-  ()
+  let context =
+    match ast with
+    | [] -> "UNK"
+    | hd :: _ ->
+        let iden, _ = hd in
+        iden
+  in
+  let state_interface =
+    Hashtbl.fold (fun k _ acc -> k :: acc) transition_table []
+  in
+  let states = Hashtbl.fold (fun k _ acc -> k :: acc) state_table [] in
+
+  (context, state_interface, states)

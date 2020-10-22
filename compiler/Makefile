@@ -4,8 +4,8 @@ OFLAGS =  -w A -warn-error A
 
 all: myrnac
 
-myrnac: parser.ml lexer.ml dump.ml fe.ml me.ml driver.ml
-	ocamlopt $(OFLAGS) -o $@ parser.ml lexer.ml dump.ml fe.ml me.ml driver.ml
+myrnac: parser.ml lexer.ml dump.ml fe.ml me.ml be.ml driver.ml
+	ocamlopt $(OFLAGS) -o $@ parser.ml lexer.ml dump.ml fe.ml me.ml be.ml driver.ml
 
 debug: myrnac-debug
 
