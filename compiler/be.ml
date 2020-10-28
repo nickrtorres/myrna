@@ -32,7 +32,7 @@ let context_impl_accepts transitions =
   printf "%sfor c in self.candidate.chars() {\n" double_indent;
   List.iter transition_string transitions;
   printf "%s}\n" double_indent;
-  printf "%sself.state.terminal()\n" double_indent;
+  printf "%sself.state.accepting()\n" double_indent;
   printf "%s}\n" single_indent
 
 let state_declarations states =

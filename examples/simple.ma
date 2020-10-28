@@ -7,12 +7,12 @@ machine AyBee {
     B -> E,
   }
 
-  nonterminal S1 {
+  state S1 {
     A -> S2,
     B -> S2,
   }
 
-  terminal S2 {
+  accepting S2 {
     A -> E,
     B -> E,
   }

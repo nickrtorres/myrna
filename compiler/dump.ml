@@ -25,11 +25,11 @@ and print_feature f =
   | Entry (iden, s) ->
       printf "\tENTRY: %s\n" iden;
       print_state_transitions s
-  | Terminal (iden, s) ->
-      printf "\tTERMINAL %s\n" iden;
+  | Accepting (iden, s) ->
+      printf "\tACCEPTING %s\n" iden;
       print_state_transitions s
-  | NonTerminal (iden, s) ->
-      printf "\tNONTERMINAL %s\n" iden;
+  | State (iden, s) ->
+      printf "\tSTATE %s\n" iden;
       print_state_transitions s
 
 and print_state_transitions transitions =

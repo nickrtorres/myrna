@@ -10,14 +10,7 @@ let main () =
   Arg.parse args print_endline usage;
   if !do_dump_ast then dump_ast ast else ();
   try
-    let name, _, _ = Me.into_ir ast in
-    let _ = Be.context_struct name in
-    let _ = Be.context_impl_from name "Entry" in
-    let l = [ ("A", "a"); ("B", "b") ] in
-    let _ = Be.context_impl_accepts l in
-    Be.state_declarations [ "Entry"; "Terminal1" ];
-    Be.state_interface [ "A"; "B"; "C" ];
-    Be.interface_implementations [ ("S1", ("A", "S2")); ("S2", ("B", "S3")) ];
+    let _ = Me.into_ir ast in
     ()
   with
   | Me.UndefinedState s ->
