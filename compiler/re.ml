@@ -1,6 +1,7 @@
 (*
- * re represents a regular expression as described by Ullman et al.
- * in 'Introduction to Automata Theory'.
+ * A regular expression, as Ullman et al. describe, is either atomic -- meaning
+ * it cannot be broken down anymore -- or a canonical operation -- union,
+ * concatentation, closure, or grouping.
  *)
 type re =
   | Atom of atom
