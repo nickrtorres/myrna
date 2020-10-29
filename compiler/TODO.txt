@@ -1,0 +1,9 @@
+- Convert AST to DFA
+  - Currently, a DFA is a Hashtbl where k = a transition i -> j and v = a
+    regular expression for the transition.
+    - The simplest way to build the regular expression for the transition is to
+      union each edge.
+- Feed DFA into kleene's algorithm
+- Simplify RE computed by kleene's algorithm
+- Output RE to STDOUT
+- Probably more
