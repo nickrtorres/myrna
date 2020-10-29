@@ -1,6 +1,14 @@
 %{
 type identifier = string
 
+(*
+ * This structure does not strictly match the definition of a state machine.
+ * A state machine has a set of states, S, and an accepting state A that exists
+ * S -- that is, the accepting state is just another state in S. To make
+ * analysis simpler Accepting and State are separate constructors in the
+ * machine_feature data structure.
+ * 
+ *)
 type machine = identifier * machine_feature list
 and machine_feature =
   | Transition of identifier * string

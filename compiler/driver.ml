@@ -9,13 +9,6 @@ let main () =
   let ast = ast () in
   Arg.parse args print_endline usage;
   if !do_dump_ast then dump_ast ast else ();
-  try
-    let _ = Me.into_ir ast in
-    ()
-  with
-  | Me.UndefinedState s ->
-      Printf.printf "myrnac: error: encountered undefined state -> %s\n" s
-  | Me.UndefinedTransition s ->
-      Printf.printf "myrnac: error: encountered undefined transition -> %s\n" s
+  ()
 
-let _ = main ()
+let () = main ()
