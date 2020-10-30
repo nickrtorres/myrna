@@ -4,10 +4,10 @@ open Simplify
 exception TestFailed of string
 
 let fail actual expected =
-  raise
-    (TestFailed
-       (Printf.sprintf "expected '%s' got '%s'" (debug_string expected)
-          (debug_string actual)))
+  let e = debug_string expected in
+  let a = debug_string actual in
+  let msg = Printf.sprintf "expected '%s' got '%s'" e a in
+  raise (TestFailed msg)
 
 let check actual expected =
   match actual with e when e = expected -> () | _ -> fail actual expected
