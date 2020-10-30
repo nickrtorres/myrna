@@ -9,10 +9,11 @@ SOURCES = parser.ml lexer.ml dump.ml fe.ml me.ml re.ml kleene.ml be.ml driver.ml
 myrnac: $(SOURCES)
 	ocamlopt $(OFLAGS) -o $@ $(SOURCES)
 
-debug: myrnac-debug
+check: tests
+	./tests
 
-myrnac-debug: $(SOURCES)
-	ocamlc $(OFLAGS) -g -o $@ $(SOURCES)
+tests: re.ml simplify.ml tests.ml
+	ocamlopt -o $@ re.ml simplify.ml tests.ml
 
 lexer.ml: lexer.mll
 	ocamllex $?
@@ -31,4 +32,6 @@ clean:
 	rm -f me.cmi me.cmx me.cmo me.o
 	rm -f parser.mli parser.ml parser.cmi parser.cmx parser.cmo parser.o
 	rm -f re.cmi re.cmx re.cmo re.o
-	rm -f myrnac myrnac-debug
+	rm -f simplify.cmi simplify.cmx simplify.cmo simplify.o
+	rm -f tests.cmi tests.cmx tests.cmo tests.o
+	rm -f myrnac myrnac-debug tests

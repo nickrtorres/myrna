@@ -14,6 +14,22 @@ and atom = Epsilon | Null | Char of char
 
 type re_snapshot_key = { i : int; j : int; k : int }
 
+let rec debug_string exp =
+  let atom_to_string a =
+    match a with
+    | Epsilon -> "Atom (Epsilon)"
+    | Null -> "Atom (Null)"
+    | Char c -> Printf.sprintf "Atom (Char (%c))" c
+  in
+  match exp with
+  | Atom a -> atom_to_string a
+  | Union (e1, e2) ->
+      Printf.sprintf "(%s + %s)" (debug_string e1) (debug_string e2)
+  | Concatenation (e1, e2) ->
+      Printf.sprintf "%s%s" (debug_string e1) (debug_string e2)
+  | Closure e -> Printf.sprintf "(%s)*" (debug_string e)
+  | Group e -> Printf.sprintf "(%s)" (debug_string e)
+
 let pretty_print exp =
   let rec to_string exp =
     let atom_to_string a =
