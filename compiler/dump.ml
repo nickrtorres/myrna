@@ -1,14 +1,7 @@
 open Parser
 open Printf
 
-let rec print_ast ast_list =
-  match ast_list with
-  | [] -> ()
-  | hd :: tl ->
-      print_machine hd;
-      print_ast tl
-
-and print_machine (iden, feature_list) =
+let rec print_machine (iden, feature_list) =
   printf "MACHINE: %s\n" iden;
   print_feature_list feature_list
 
@@ -45,6 +38,6 @@ and print_transition s =
 
 let dump_ast ast =
   try
-    print_ast ast;
+    print_machine ast;
     flush stdout
   with Lexer.Eof -> ()

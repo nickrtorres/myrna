@@ -1,10 +1,10 @@
 .POSIX:
 
 OFLAGS =  -w A -warn-error A
+SOURCES = parser.ml lexer.ml dump.ml \
+	fe.ml me.ml re.ml kleene.ml be.ml driver.ml
 
 all: myrnac
-
-SOURCES = parser.ml lexer.ml dump.ml fe.ml me.ml re.ml kleene.ml be.ml driver.ml
 
 myrnac: $(SOURCES)
 	ocamlopt $(OFLAGS) -o $@ $(SOURCES)

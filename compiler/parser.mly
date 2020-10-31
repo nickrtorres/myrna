@@ -18,7 +18,7 @@ and machine_feature =
 and state_desc =
   identifier * identifier
 
-type myrna_program = machine list
+type myrna_program = machine
 %}
 
 %token MACHINE TRANSITION LBRACE RBRACE EQ ARROW COMMA ENTRY ACCEPTING STATE
@@ -27,7 +27,7 @@ type myrna_program = machine list
 %type  <myrna_program> program
 
 %%
-program : machine                                              { $1 :: [] }
+program : machine                                              { $1 }
   ;
 
 machine : MACHINE IDENT LBRACE machine_feature_list RBRACE     { ($2, $4) }
